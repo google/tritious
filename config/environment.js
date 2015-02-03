@@ -24,14 +24,16 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.APP_BASE = "http://localhost:8080";
   }
 
   if (environment === 'test') {
     ENV.baseURL = '/'; // Testem prefers this...
+    ENV.APP.APP_BASE = "http://localhost:8080";
   }
 
   if (environment === 'production') {
-
+    ENV.APP.APP_BASE = "http://localhost:8080";
   }
 
   return ENV;
