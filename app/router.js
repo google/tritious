@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('viewport');
   this.route('map');
   this.route('npcs');
+  this.route('me');
 });
 
 export default Router;

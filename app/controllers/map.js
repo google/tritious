@@ -20,9 +20,13 @@ export default Ember.ObjectController.extend({
 
           stuff.push({
             'class': map[i][j],
-            'style': "left: " + (j * 64) + "px; " +
-                     "top:  " + (i * 64) + "px; " +
+            'style': "left:   " + (j * 64) + "px; " +
+                     "top:    " + (i * 64) + "px; " +
+                     "width:  64px; " +
+                     "height: 64px; " +
                      "background-image: url('" + tile['img'] + "'); " +
+                     "background-size: 64px 64px; " +
+                     "position: absolute; " +
                      "",
             'passable': tile['passable'],
           });
