@@ -16,15 +16,10 @@ export default Ember.ObjectController.extend({
           }
 
           stuff.push({
-            'class': map[i][j],
+            'class': 'tile ' + (tile['passable'] ? 'clickable' : ''),
             'style': "left:   " + (j * 64) + "px; " +
                      "top:    " + (i * 64) + "px; " +
-                     "width:  64px; " +
-                     "height: 64px; " +
                      "background-image: url('" + tile['img'] + "'); " +
-                     "background-size: 64px 64px; " +
-                     "position: absolute; " +
-                     "cursor: " + (tile['passable'] ? 'pointer' : 'auto') + "; " +
                      "",
             'passable': tile['passable'],
             'x': j,

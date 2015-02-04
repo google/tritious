@@ -1,0 +1,12 @@
+{{#if conversation}}
+  <div class='overlay'>
+  </div>
+  <div {{action 'nextConversation'}} class='conversation'>
+    <div class='header'>
+      <div class='img'><img {{bind-attr src="conversation.img"}} /></div>
+      <div class='name'>{{conversation.name}}</div>
+    </div>
+
+    <p>{{conversationText}}</p>
+  </div>
+{{/if}}

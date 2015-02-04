@@ -1,4 +1,71 @@
-<p>This is the viewport! And you are probably {{name}}!</p>
+<style>
+  .tile {
+    width:            64px;
+    height:           64px;
+    background-image: url("/img/404.png");
+    background-size:  64px 64px;
+    position:         absolute;
+  }
+
+  .clickable {
+    cursor:           pointer;
+  }
+
+  .viewport {
+    position: relative;
+    background: blue;
+    width: 640px; /* TODO: I don't like hardcoding 640 here... */
+    height: 640px;
+    margin: 0;
+  }
+
+  .overlay {
+    width: 640px;
+    height: 640px;
+    background-color: black;
+    position: absolute;
+    opacity: 0.80;
+  }
+
+  .conversation {
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    top: 50px;
+    text-align: center;
+    font-size: 2em;
+    font-family: impact, serif;
+    padding: 16px 16px 16px 16px;
+    border-radius: 25px;
+  }
+
+  .conversation .header {
+    background: #202020;
+    display: table;
+    border-radius: 25px;
+    width: 100%;
+  }
+
+  .conversation .header .img {
+    vertical-align: middle;
+    padding: 10px 10px 10px 10px;
+    display: table-cell;
+  }
+
+  .conversation .header .name {
+    text-align: left;
+    padding: 10px 10px 10px 10px;
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 0.75em;
+   }
+</style>
+
+<p>This is the viewport! And you are probably <tt>{{me.name}}</tt>!</p>
 
 <table>
   <tr>
@@ -18,10 +85,10 @@
   </tr>
 </table>
 
-<div class='viewport' style='position: absolute'>
+<div class='viewport'>
   {{render 'map'  map}}
   {{render 'me'   me}}
   {{render 'npcs' npcs}}
+  {{partial 'conversation'}}
 </div>
-
 
