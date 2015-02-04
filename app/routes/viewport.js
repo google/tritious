@@ -15,9 +15,6 @@ export default Ember.Route.extend({
       return Ember.$.ajax("http://localhost:8080/api/map/" + me['position']['map']).then(function(map) {
         result['map'] = map;
 
-        console.log(Ember.inspect(result['me']));
-        console.log(Ember.inspect(result['map']));
-
         return result;
       });
     });

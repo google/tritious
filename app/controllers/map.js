@@ -6,9 +6,6 @@ export default Ember.ObjectController.extend({
     var map = this.get('map');
     var tiles = this.get('tiles');
 
-    console.log("Another test:");
-    console.log(map);
-    console.log(tiles);
     if(map) {
       for(var i = 0; i < map.length; i++) {
         for(var j = 0; j < map[i].length; j++) {

@@ -19,5 +19,5 @@ export default Ember.ObjectController.extend({
     });
 
     return stuff;
-  }.property('position', 'img'),
+  }.property('position.x', 'position.y', 'img'),
 });
