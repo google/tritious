@@ -24,8 +24,11 @@ export default Ember.ObjectController.extend({
                      "background-image: url('" + tile['img'] + "'); " +
                      "background-size: 64px 64px; " +
                      "position: absolute; " +
+                     "cursor: " + (tile['passable'] ? 'pointer' : 'auto') + "; " +
                      "",
             'passable': tile['passable'],
+            'x': j,
+            'y': i,
           });
         }
       }

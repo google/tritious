@@ -14,5 +14,10 @@ export default Ember.ObjectController.extend({
     right: function() {
       this.set('me.position.x', this.get('me.position.x') + 1);
     },
+
+    moveHere: function(x, y) {
+      this.set('me.position.x', x);
+      this.set('me.position.y', y);
+    },
   },
 });

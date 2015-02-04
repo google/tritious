@@ -1,3 +1,7 @@
 {{#each stuffToRender}}
-<div {{bind-attr class="class"}} {{bind-attr style="style"}}></div>
+{{#if passable}}
+  <div {{bind-attr class="class"}} {{bind-attr style="style"}} {{action 'moveHere' x y}}></div>
+{{else}}
+  <div {{bind-attr class="class"}} {{bind-attr style="style"}}></div>
+{{/if}}
 {{/each}}
