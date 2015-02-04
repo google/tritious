@@ -26,8 +26,9 @@ export default Ember.ObjectController.extend({
     talk: function(npc) {
       var self = this;
 
-      Ember.$.ajax("http://localhost:8080/api/npc/" + npc).then(function(result) {
+      Ember.$.ajax("http://localhost:8080/api/npc/" + npc['id']).then(function(result) {
         self.set('conversation', result);
+        self.set('conversationImage', npc['img']);
         self.send('nextConversation');
       });
     },
@@ -39,13 +40,25 @@ export default Ember.ObjectController.extend({
         return null;
       }
 
-      console.log(conversation);
       if(conversation['text'].length === 0) {
         this.set('conversation', null);
         return null;
       }
 
       this.set('conversationText', conversation['text'].shift());
+    },
+
+    interact: function(object) {
+      console.log(object);
+      switch(object['type']) {
+        case 'exit':
+          console.log(object);
+          this.transitionToRoute('viewport', object['details']['newmap']);
+          break;
+
+        default:
+          alert("Unknown action: " + object['type']);
+      }
     },
   },
 });

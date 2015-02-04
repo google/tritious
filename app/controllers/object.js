@@ -11,14 +11,16 @@ export default Ember.ObjectController.extend({
     stuff.push({
       'class': 'tile clickable',
       'style': "left:   " + (x * 64) + "px; " +
-              "top:    " + (y * 64) + "px; " +
-              "background-image: url('" + img + "'); " +
-              "",
+               "top:    " + (y * 64) + "px; " +
+               "background-image: url('" + img + "'); " +
+               "",
+
       'details': {
-        'id':  this.get('id'),
-        'img': this.get('img'),
-        'x':   this.get('x'),
-        'y':   this.get('y'),
+        'type':    this.get('type'),
+        'img':     this.get('img'),
+        'details': this.get('details'),
+        'x':       this.get('x'),
+        'y':       this.get('y'),
       }
     });
 

@@ -1,0 +1,5 @@
+{{#each}}
+  {{#each stuffToRender}}
+    <div {{bind-attr class="class"}} {{bind-attr style="style"}} {{action "interact" details}}></div>
+  {{/each}}
+{{/each}}

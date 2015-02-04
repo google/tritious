@@ -1,12 +1,11 @@
 {{#if conversation}}
-  <div class='overlay'>
+  <div  {{action 'nextConversation'}} class='overlay clickable'>
   </div>
-  <div {{action 'nextConversation'}} class='conversation'>
+  <div {{action 'nextConversation'}} class='conversation clickable noselect'>
     <div class='header'>
-      <div class='img'><img {{bind-attr src="conversation.img"}} /></div>
+      <div class='img'><img {{bind-attr src="conversationImage"}} /></div>
       <div class='name'>{{conversation.name}}</div>
     </div>
-
     <p>{{conversationText}}</p>
   </div>
 {{/if}}

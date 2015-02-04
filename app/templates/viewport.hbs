@@ -19,6 +19,15 @@
     margin: 0;
   }
 
+  .noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select:   none;
+    -khtml-user-select:    none;
+    -moz-user-select:      none;
+    -ms-user-select:       none;
+    user-select:           none;
+  }
+
   .overlay {
     width: 640px;
     height: 640px;
@@ -33,7 +42,6 @@
     height: auto;
     background-color: black;
     color: white;
-    cursor: pointer;
     position: relative;
     top: 50px;
     text-align: center;
@@ -86,9 +94,10 @@
 </table>
 
 <div class='viewport'>
-  {{render 'map'  map}}
-  {{render 'me'   me}}
-  {{render 'npcs' npcs}}
+  {{render 'map'     map}}
+  {{render 'me'      me}}
+  {{render 'npcs'    npcs}}
+  {{render 'objects' objects}}
   {{partial 'conversation'}}
 </div>
 
