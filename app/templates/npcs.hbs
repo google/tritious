@@ -1,3 +1,7 @@
-{{#each stuffToRender}}
-<div {{bind-attr class="class"}} {{bind-attr style="style"}}></div>
+<div style='position: absolute; width: 100px; height: 100px;'>
+{{#each}}
+  {{#each stuffToRender}}
+    <div {{bind-attr class="class"}} {{bind-attr style="style"}}></div>
+  {{/each}}
 {{/each}}
+</div>
