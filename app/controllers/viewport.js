@@ -3,26 +3,58 @@ import Ember from 'ember';
 export default Ember.ObjectController.extend({
   conversation: null,
   conversationText: null,
-  warningShowed: false,
+  warning: null,
 
-  showWarning: function() {
-    if(!this.get('warningShowed')) {
-      alert("Hey, did you know that you can click on the map to move!?\n\nI left these buttons for now cuz they're fun. :)\n\nI won't bug you again!");
-      this.set('warningShowed', true);
-    }
+  changeMap: function(newmap, x, y) {
+    var self = this;
+
+    // TODO: Use a real token here
+    Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" + "x=" + x + "&" + "y=" + y + "&" + "map=" + newmap + "&" + "token=mytoken1337").then(
+      function() {
+        Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/map/" + newmap).then(
+          function(map) {
+            self.set('map', map);
+            self.set('npcs', map['npcs']);
+            self.set('objects', map['objects']);
+
+            self.set('me.position.x',   x);
+            self.set('me.position.y',   y);
+            self.set('me.position.map', newmap);
+          },
+          function() {
+            self.set('warning', "An error occured while trying to change maps, refreshing might help!");
+          }
+        );
+      }
+    );
+  },
+
+  move: function(x, y) {
+    var self = this;
+
+    var oldx   = this.get('me.position.x');
+    var oldy   = this.get('me.position.y');
+
+    this.set('me.position.x', x);
+    this.set('me.position.y', y);
+
+    // TODO: Use a real token here
+    Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" + "x=" + x + "&" + "y=" + y + "&" + "map=" + this.get('me.position.map') + "&" + "token=mytoken1337").then(
+      // Success
+      function() {
+      },
+      function() {
+        self.set("warning", "Couldn't save new position!");
+
+        this.set('me.position.x', oldx);
+        this.set('me.position.y', oldy);
+      }
+    );
   },
 
   actions: {
     moveHere: function(x, y) {
-      this.set('me.position.x', x);
-      this.set('me.position.y', y);
-
-      // TODO: Use a real token here
-      Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" +
-          "x=" + x + "&" +
-          "y=" + y + "&" +
-          "map=" + this.get('me.position.map') + "&" +
-          "token=mytoken1337");
+      this.move(x, y);
     },
 
     talk: function(npc) {
@@ -54,27 +86,8 @@ export default Ember.ObjectController.extend({
       console.log(object);
       switch(object['type']) {
         case 'exit':
-          var self = this;
-          Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" +
-              "x=" + object['details']['newx'] + "&" +
-              "y=" + object['details']['newy'] + "&" +
-              "map=" + object['details']['newmap'] + "&" +
-              "token=mytoken1337").then(function() {
+          this.changeMap(object['details']['newmap'], object['details']['newx'], object['details']['newy']);
 
-            // TODO: When the map is changed, it'd be handy to automatically do
-            // all this stuff
-            Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/map/" + object['details']['newmap']).then(function(map) {
-              self.set('map', map);
-              self.set('npcs', map['npcs']);
-              self.set('objects', map['objects']);
-
-              self.set('me.position.x',   object['details']['newx']);
-              self.set('me.position.y',   object['details']['newy']);
-              self.set('me.position.map', object['details']['newmap']);
-            });
-          });
-
-          //this.transitionToRoute('viewport', object['details']['newmap']);
           break;
 
         default:

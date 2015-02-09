@@ -75,11 +75,17 @@
 
 <p>This is the viewport! And you are probably <tt>{{me.name}}</tt>!</p>
 
+{{#if 'warning'}}
+  <div class='warning'>
+    <p>WARNING: {{warning}}
+  </div>
+{{/if}}
+
 <div class='viewport'>
   {{render 'map'     map}}
-  {{render 'me'      me}}
-  {{render 'npcs'    npcs}}
   {{render 'objects' objects}}
+  {{render 'npcs'    npcs}}
+  {{render 'me'      me}}
   {{partial 'conversation'}}
 </div>
 
