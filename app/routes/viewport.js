@@ -10,12 +10,11 @@ export default Ember.Route.extend({
 
       return Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/map/" + map_id).then(function(map) {
         result['map'] = map;
-        result['npcs'] = map['npcs'];
-        result['objects'] = map['objects'];
 
         return result;
       });
     });
   },
+
 
 });

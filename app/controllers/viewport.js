@@ -5,26 +5,40 @@ export default Ember.ObjectController.extend({
   conversationText: null,
   warning: null,
 
+  /* Automatically load the map whenever me.position.newmap is set */
+  updateMap: function() {
+    var self = this;
+
+    if(this.get('newmap')) {
+      Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/map/" + this.get('newmap')).then(
+        function(map) {
+          self.set('map', map);
+
+          self.set('me.position.x',   self.get('newx'));
+          self.set('me.position.y',   self.get('newy'));
+          self.set('me.position.map', self.get('newmap'));
+        },
+        function() {
+          self.set('warning', "An error occured while trying to change maps, refreshing might help!");
+        }
+      );
+    }
+  }.observes('newmap'),
+
+  /* This basically just sets up some variables in such a way that updateMap()
+   * will take over. */
   changeMap: function(newmap, x, y) {
     var self = this;
 
     // TODO: Use a real token here
     Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" + "x=" + x + "&" + "y=" + y + "&" + "map=" + newmap + "&" + "token=mytoken1337").then(
       function() {
-        Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/map/" + newmap).then(
-          function(map) {
-            self.set('map', map);
-            self.set('npcs', map['npcs']);
-            self.set('objects', map['objects']);
-
-            self.set('me.position.x',   x);
-            self.set('me.position.y',   y);
-            self.set('me.position.map', newmap);
-          },
-          function() {
-            self.set('warning', "An error occured while trying to change maps, refreshing might help!");
-          }
-        );
+        self.set('newx',   x);
+        self.set('newy',   y);
+        self.set('newmap', newmap);
+      },
+      function() {
+        self.set('warning', "An error occured while trying to change maps, refreshing might help!");
       }
     );
   },

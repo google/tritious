@@ -83,8 +83,8 @@
 
 <div class='viewport'>
   {{render 'map'     map}}
-  {{render 'objects' objects}}
-  {{render 'npcs'    npcs}}
+  {{render 'objects' map.objects}}
+  {{render 'npcs'    map.npcs}}
   {{render 'me'      me}}
   {{partial 'conversation'}}
 </div>
