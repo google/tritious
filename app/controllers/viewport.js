@@ -13,32 +13,22 @@ export default Ember.ObjectController.extend({
   },
 
   actions: {
-    up: function() {
-      this.set('me.position.y', this.get('me.position.y') - 1);
-      this.showWarning();
-    },
-    down: function() {
-      this.set('me.position.y', this.get('me.position.y') + 1);
-      this.showWarning();
-    },
-    left: function() {
-      this.set('me.position.x', this.get('me.position.x') - 1);
-      this.showWarning();
-    },
-    right: function() {
-      this.set('me.position.x', this.get('me.position.x') + 1);
-      this.showWarning();
-    },
-
     moveHere: function(x, y) {
       this.set('me.position.x', x);
       this.set('me.position.y', y);
+
+      // TODO: Use a real token here
+      Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" +
+          "x=" + x + "&" +
+          "y=" + y + "&" +
+          "map=" + this.get('me.position.map') + "&" +
+          "token=mytoken1337");
     },
 
     talk: function(npc) {
       var self = this;
 
-      Ember.$.ajax("http://localhost:8080/api/npc/" + npc['id']).then(function(result) {
+      Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/npc/" + npc['id']).then(function(result) {
         self.set('conversation', result);
         self.set('conversationImage', npc['img']);
         self.send('nextConversation');
@@ -64,8 +54,27 @@ export default Ember.ObjectController.extend({
       console.log(object);
       switch(object['type']) {
         case 'exit':
-          console.log(object);
-          this.transitionToRoute('viewport', object['details']['newmap']);
+          var self = this;
+          Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" +
+              "x=" + object['details']['newx'] + "&" +
+              "y=" + object['details']['newy'] + "&" +
+              "map=" + object['details']['newmap'] + "&" +
+              "token=mytoken1337").then(function() {
+
+            // TODO: When the map is changed, it'd be handy to automatically do
+            // all this stuff
+            Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/map/" + object['details']['newmap']).then(function(map) {
+              self.set('map', map);
+              self.set('npcs', map['npcs']);
+              self.set('objects', map['objects']);
+
+              self.set('me.position.x',   object['details']['newx']);
+              self.set('me.position.y',   object['details']['newy']);
+              self.set('me.position.map', object['details']['newmap']);
+            });
+          });
+
+          //this.transitionToRoute('viewport', object['details']['newmap']);
           break;
 
         default:

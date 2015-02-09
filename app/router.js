@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('application');
-  this.route('viewport', { 'path': '/game/:map_id' });
+  this.route('viewport', { 'path': '/' });
   this.route('map');
   this.route('npcs');
   this.route('me');

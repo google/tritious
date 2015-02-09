@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -29,11 +29,12 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     ENV.baseURL = '/'; // Testem prefers this...
-    ENV.APP.APP_BASE = "http://localhost:8080";
+    ENV.APP.APP_BASE = "";
   }
 
   if (environment === 'production') {
-    ENV.APP.APP_BASE = "http://localhost:8080";
+    ENV.baseURL = '/';
+    ENV.APP.APP_BASE = "";
   }
 
   return ENV;

@@ -75,24 +75,6 @@
 
 <p>This is the viewport! And you are probably <tt>{{me.name}}</tt>!</p>
 
-<table>
-  <tr>
-    <td></td>
-    <td><button {{action 'up'}}>^</button></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><button {{action 'left'}}>&lt;</button></td>
-    <td></td>
-    <td><button {{action 'right'}}>&gt;</button></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><button {{action 'down'}}>v</button></td>
-    <td></td>
-  </tr>
-</table>
-
 <div class='viewport'>
   {{render 'map'     map}}
   {{render 'me'      me}}
