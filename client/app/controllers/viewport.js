@@ -108,5 +108,9 @@ export default Ember.ObjectController.extend({
           alert("Unknown action: " + object['type']);
       }
     },
+
+    reset: function() {
+      this.changeMap("main", 4, 4);
+    }
   },
 });
