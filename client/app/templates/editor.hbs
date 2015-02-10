@@ -1,0 +1,16 @@
+<div id='size'>
+  <p>Height: {{input value=height}}</p>
+  <p>Width: {{input value=width}}</p>
+</div>
+
+<div id='tiles'>
+  {{#each tiles}}
+  <img class='tile' style='position: relative; border: 1px solid blue; cursor: pointer; ' {{bind-attr src='img'}} {{action 'selectTile' name}} />
+  {{/each}}
+</div>
+
+<div class='viewport'>
+{{#each stuffToRender}}
+  <div {{bind-attr class="class"}} {{bind-attr style="style"}} {{action 'putTileHere' x y}}></div>
+{{/each}}
+</div>
