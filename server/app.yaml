@@ -1,0 +1,24 @@
+application: google.com:morphity-dev
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: false
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+- name: jinja2
+  version: "2.6"
+
+handlers:
+# Main handler
+- url: /api/.*
+  script: app.application
+
+- url: /(.+)
+  static_files: ember/\1
+  upload: ember/(.+)
+
+- url: /
+  static_files: ember/index.html
+  upload: ember/index.html
