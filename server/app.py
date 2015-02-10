@@ -7,6 +7,22 @@ from google.appengine.ext import ndb
 
 from player import *
 
+def get_tiles():
+    return {
+                '404':         { 'passable': False, 'img': 'img/404.png' },
+                'corner-bl':   { 'passable': False, 'img': 'img/corner-bl.png' },
+                'corner-br':   { 'passable': False, 'img': 'img/corner-br.png' },
+                'corner-tl':   { 'passable': False, 'img': 'img/corner-tl.png' },
+                'corner-tr':   { 'passable': False, 'img': 'img/corner-tr.png' },
+                'floor':       { 'passable': True,  'img': 'img/floor.png' },
+                'grass':       { 'passable': True,  'img': 'img/grass.png' },
+                'rock':        { 'passable': False, 'img': 'img/rock.png' },
+                'wall-bottom': { 'passable': False, 'img': 'img/wall-bottom.png' },
+                'wall-left':   { 'passable': True,  'img': 'img/wall-left.png' },
+                'wall-top':    { 'passable': False, 'img': 'img/wall-top.png' },
+                'wall-right':  { 'passable': True,  'img': 'img/wall-right.png' },
+    }
+
 def handle_500(request, response, exception):
     response.out.write("error")
 
@@ -76,20 +92,29 @@ class ApiMapRouter(webapp2.RequestHandler):
     def get(self, map_id):
         if(map_id == "main"):
             print_json(self, {
-                "test": "hi",
-
                 # The array of tiles
                 "map": [
-                    ["rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
-                    ["rock",  "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock",  "grass", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "grass", "rock"],
-                    ["rock",  "grass", "grass", "grass", "grass", "grass", "rock",  "rock",  "grass", "rock"],
-                    ["rock",  "rock",  "rock",  "rock",  "grass", "grass", "grass", "rock",  "grass", "rock"],
-                    ["rock",  "rock",  "rock",  "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock",  "grass", "grass", "grass", "grass", "rock",  "rock",  "rock",  "rock",  "rock"],
-                    ["rock",  "grass", "grass", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
-                    ["rock",  "grass", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
-                    ["rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
+#                   ["rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
+#                   ["rock",  "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
+#                   ["rock",  "grass", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "grass", "rock"],
+#                   ["rock",  "grass", "grass", "grass", "grass", "grass", "rock",  "rock",  "grass", "rock"],
+#                   ["rock",  "rock",  "rock",  "rock",  "grass", "grass", "grass", "rock",  "grass", "rock"],
+#                   ["rock",  "rock",  "rock",  "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
+#                   ["rock",  "grass", "grass", "grass", "grass", "rock",  "rock",  "rock",  "rock",  "rock"],
+#                   ["rock",  "grass", "grass", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
+#                   ["rock",  "grass", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
+#                   ["rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
+
+                    ["corner-tl",                  "wall-top",     "wall-top",     "wall-top",                     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "corner-tr"],
+                    [["wall-left", "floor"],       "floor",        "floor",        "floor",                        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"],       "floor",        "floor",        "floor",                        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"],       "floor",        "floor",        "floor",                        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "wall-bottom"], "wall-bottom",  "wall-bottom",  ["wall-right", "wall-bottom"],  "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"],       "floor",        "floor",        "floor",                        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"],       "floor",        "floor",        "floor",                        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"],       "floor",        "floor",        "floor",                        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"],       "floor",        "floor",        "floor",                        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    ["corner-bl",                  "wall-bottom",  "wall-bottom",  "wall-bottom",                  "wall-bottom",  "wall-bottom",  "wall-bottom",  "wall-bottom",  "wall-bottom",  "corner-br"],
                 ],
 
                 # NPCs
@@ -115,20 +140,7 @@ class ApiMapRouter(webapp2.RequestHandler):
                 ],
 
                 # Tiles
-                "tiles": {
-                  "grass": {
-                      "img":      "img/grass.png",
-                      "passable": True,
-                  },
-                  "rock": {
-                      "img":      "img/rock.png",
-                      "passable": False,
-                  },
-                  "404": {
-                      "img":      "img/404.png",
-                      "passable": False,
-                  },
-               }
+                "tiles": get_tiles(),
             })
         elif(map_id == "map2"):
              print_json(self, {
@@ -136,16 +148,16 @@ class ApiMapRouter(webapp2.RequestHandler):
 
                 # The array of tiles
                 "map": [
-                    ["rock", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "rock"],
-                    ["rock", "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock",  "rock"],
+                    ["corner-tl",            "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "corner-tr"],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    [["wall-left", "floor"], "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",        "floor",       ["wall-right", "floor"]],
+                    ["corner-bl",            "wall-bottom",  "wall-bottom",  "wall-bottom",  "wall-bottom",  "wall-bottom",  "wall-bottom",  "wall-bottom",  "wall-bottom",  "corner-br"],
                 ],
 
                 # NPCs
@@ -170,20 +182,7 @@ class ApiMapRouter(webapp2.RequestHandler):
                 ],
 
                 # Tiles
-                "tiles": {
-                  "grass": {
-                      "img":      "img/grass.png",
-                      "passable": True,
-                  },
-                  "rock": {
-                      "img":      "img/rock.png",
-                      "passable": False,
-                  },
-                  "404": {
-                      "img":      "img/404.png",
-                      "passable": False,
-                  },
-               }
+                "tiles": get_tiles(),
             })
         else:
              print_json(self, {
@@ -215,6 +214,10 @@ class ApiMapRouter(webapp2.RequestHandler):
                   },
                }
             })
+
+class ApiTilesRouter(webapp2.RequestHandler):
+    def get(self):
+        print_json(self, get_tiles())
 
 class ApiNpcRouter(webapp2.RequestHandler):
     def get(self, id):
@@ -267,6 +270,8 @@ application = webapp2.WSGIApplication([
     ('^/api/move',       ApiMoveRouter),
     ('^/api/map/(\w+)',  ApiMapRouter),
     ('^/api/npc/(\w+)',  ApiNpcRouter),
+
+    ('^/api/tiles',      ApiTilesRouter),
 
     ('^/api/register',   ApiRegisterRouter),
     ('^/api/properties', ApiPropertiesRouter),

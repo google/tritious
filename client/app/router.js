@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('npcs');
   this.route('me');
   this.route('objects');
+  this.route('editor');
 });
 
 export default Router;

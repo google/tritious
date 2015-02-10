@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  tileHeight: 64,
+  tileWidth:  64,
+
   stuffToRender: function() {
     var stuff = [];
 
@@ -10,8 +13,8 @@ export default Ember.ObjectController.extend({
 
     stuff.push({
       'class': 'tile clickable',
-      'style': "left:   " + (x * 64) + "px; " +
-               "top:    " + (y * 64) + "px; " +
+      'style': "left:   " + (x * this.get('tileWidth'))  + "px; " +
+               "top:    " + (y * this.get('tileHeight')) + "px; " +
                "background-image: url('" + img + "'); " +
                "",
 
