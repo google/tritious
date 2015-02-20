@@ -6,10 +6,13 @@ export default Ember.ObjectController.extend({
 
   height: 10,
   width: 10,
+  name: "nameme!",
   tiles: [],
   tilesObject: {},
-  activeTile: {'img': 'img/grass.png'},
+  activeTile: "clear",
   map: [],
+
+  test: 0,
 
   init: function() {
     var self = this;
@@ -37,15 +40,11 @@ export default Ember.ObjectController.extend({
     var stuff = [];
     var map = this.get('map');
 
-    console.log("Render?");
-
-    if(map) {
-      for(var i = 0; i < this.get('height'); i++) {
-        for(var j = 0; j < this.get('width'); j++) {
-          if(map[i] && map[i][j]) {
-            var image = "img/" + map[i][j] + ".png";
-            var tile = this.get('tiles')[map[i][j]];
-            console.log(tile);
+    for(var i = 0; i < this.get('height'); i++) {
+      for(var j = 0; j < this.get('width'); j++) {
+        if(map[i] && map[i][j]) {
+          for(var k = 0; k < map[i][j].length; k++) {
+            var image = "img/" + map[i][j][k] + ".png";
 
             stuff.push({
               'class': 'tile',
@@ -57,17 +56,17 @@ export default Ember.ObjectController.extend({
               'x': j,
               'y': i,
             });
-          } else {
-            stuff.push({
-              'class': 'tile',
-              'style': "left:   " + (j * this.get('tileWidth'))  + "px; " +
-                       "top:    " + (i * this.get('tileHeight')) + "px; " +
-                       "border: 1px solid black; " +
-                       "",
-              'x': j,
-              'y': i,
-            });
           }
+        } else {
+          stuff.push({
+            'class': 'tile',
+            'style': "left:   " + (j * this.get('tileWidth'))  + "px; " +
+                     "top:    " + (i * this.get('tileHeight')) + "px; " +
+                     "border: 1px solid black; " +
+                     "",
+            'x': j,
+            'y': i,
+          });
         }
       }
     }
@@ -89,13 +88,25 @@ export default Ember.ObjectController.extend({
 
     putTileHere: function(x, y) {
       var map = this.get("map");
+
+      var called = this.get("test");
+      called++;
+      console.log("Called " + called + " times!");
+      this.set("test", called);
+
       if(!map[y]) {
         map[y] = [];
       }
-      map[y][x] = this.get("activeTile");
-      this.set("map", map);
 
-      console.log(map);
+      if(this.get("activeTile") === "clear") {
+        map[y][x] = [];
+      } else {
+        if(!map[y][x]) {
+          map[y][x] = [];
+        }
+
+        map[y][x].push(this.get("activeTile"));
+      }
 
       this.notifyPropertyChange('map');
     },

@@ -12,6 +12,7 @@ export default Ember.ObjectController.extend({
     if(map) {
       for(var i = 0; i < map.length; i++) {
         for(var j = 0; j < map[i].length; j++) {
+          /* TODO: This shouldn't be necessary after the editor is done */
           if(!(map[i][j] instanceof Array)) {
             map[i][j] = [map[i][j]];
           }
