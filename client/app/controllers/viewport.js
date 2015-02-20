@@ -10,7 +10,7 @@ export default Ember.ObjectController.extend({
     var self = this;
 
     if(this.get('newmap')) {
-      Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/map/" + this.get('newmap')).then(
+      Ember.$.ajax(window.TritiousENV.APP.APP_BASE + "/api/map/" + this.get('newmap')).then(
         function(map) {
           self.set('map', map);
 
@@ -31,7 +31,7 @@ export default Ember.ObjectController.extend({
     var self = this;
 
     // TODO: Use a real token here
-    Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" + "x=" + x + "&" + "y=" + y + "&" + "map=" + newmap + "&" + "token=mytoken1337").then(
+    Ember.$.ajax(window.TritiousENV.APP.APP_BASE + "/api/move?" + "x=" + x + "&" + "y=" + y + "&" + "map=" + newmap + "&" + "token=mytoken1337").then(
       function() {
         self.set('newx',   x);
         self.set('newy',   y);
@@ -53,7 +53,7 @@ export default Ember.ObjectController.extend({
     this.set('me.position.y', y);
 
     // TODO: Use a real token here
-    Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/move?" + "x=" + x + "&" + "y=" + y + "&" + "map=" + this.get('me.position.map') + "&" + "token=mytoken1337").then(
+    Ember.$.ajax(window.TritiousENV.APP.APP_BASE + "/api/move?" + "x=" + x + "&" + "y=" + y + "&" + "map=" + this.get('me.position.map') + "&" + "token=mytoken1337").then(
       // Success
       function() {
       },
@@ -74,7 +74,7 @@ export default Ember.ObjectController.extend({
     talk: function(npc) {
       var self = this;
 
-      Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/npc/" + npc['id']).then(function(result) {
+      Ember.$.ajax(window.TritiousENV.APP.APP_BASE + "/api/npc/" + npc['id']).then(function(result) {
         self.set('conversation', result);
         self.set('conversationImage', npc['img']);
         self.send('nextConversation');

@@ -5,10 +5,10 @@ import loadInitializers from 'ember/load-initializers';
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
-  modulePrefix: 'morphity', // TODO: loaded via config
+  modulePrefix: 'tritious', // TODO: loaded via config
   Resolver: Resolver
 });
 
-loadInitializers(App, 'morphity');
+loadInitializers(App, 'tritious');
 
 export default App;

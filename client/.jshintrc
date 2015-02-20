@@ -3,7 +3,7 @@
     "document": true,
     "window": true,
     "-Promise": true,
-    "MorphityENV": true
+    "TritiousENV": true
   },
   "browser" : true,
   "boss" : true,

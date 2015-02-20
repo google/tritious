@@ -14,7 +14,7 @@ export default Ember.ObjectController.extend({
   init: function() {
     var self = this;
 
-    Ember.$.ajax(window.MorphityENV.APP.APP_BASE + "/api/tiles").then(function(result) {
+    Ember.$.ajax(window.TritiousENV.APP.APP_BASE + "/api/tiles").then(function(result) {
       var out = [];
 
       /* Set the easy one. */

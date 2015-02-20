@@ -23,19 +23,17 @@ module.exports = function(environment) {
     ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.APP_BASE = "http://localhost:8080";
-  }
+    ENV.APP.APP_BASE = 'http://localhost:8080';
+   }
 
-  if (environment === 'test') {
-    ENV.baseURL = '/'; // Testem prefers this...
-    ENV.APP.APP_BASE = "";
-  }
+   if (environment === 'test') {
+     ENV.baseURL = '/'; // Testem prefers this...
+     ENV.APP.APP_BASE = '';
+   }
 
-  if (environment === 'production') {
-    ENV.baseURL = '/';
-    ENV.APP.APP_BASE = "";
-  }
-
+   if (environment === 'production') {
+     ENV.baseURL = '/';
+     ENV.APP.APP_BASE = '';
+   }
   return ENV;
 };

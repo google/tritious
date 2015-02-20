@@ -1,7 +1,7 @@
 /* global require */
 
-var Application = require('morphity/app')['default'];
-var Router = require('morphity/router')['default'];
+var Application = require('tritious/app')['default'];
+var Router = require('tritious/router')['default'];
 import Ember from 'ember';
 
 export default function startApp(attrs) {
