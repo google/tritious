@@ -6,6 +6,8 @@ import json
 from google.appengine.ext import ndb
 
 from player import *
+from map    import *
+from npc    import *
 
 def get_tiles():
     return {
@@ -88,8 +90,30 @@ class ApiRegisterRouter(webapp2.RequestHandler):
         print_json(self, me)
 
 
+class ApiEditMapRouter(webapp2.RequestHandler):
+    def get(self, map_id):
+        map = Map.get_map(map_id)
+        details = self.request.get("details")
+
+        Map.set_map(map_id, details)
+        print_json(self, { 'status': 0, 'msg': 'Saved!' })
+
+class ApiEditNpcRouter(webapp2.RequestHandler):
+    def get(self, npc_id):
+        npc = Npc.get_npc(npc_id)
+        details = self.request.get("details")
+
+        Npc.set_npc(npc_id, details)
+        print_json(self, { 'status': 0, 'msg': 'Saved!' })
+
 class ApiMapRouter(webapp2.RequestHandler):
     def get(self, map_id):
+        map = Map.get_map(map_id)
+
+        if(map):
+            self.response.out.write(map)
+            return
+
         if(map_id == "main"):
             print_json(self, {
                 # The array of tiles
@@ -144,8 +168,6 @@ class ApiMapRouter(webapp2.RequestHandler):
             })
         elif(map_id == "map2"):
              print_json(self, {
-                "test": "hi",
-
                 # The array of tiles
                 "map": [
                     ["corner-tl",            "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "wall-top",     "corner-tr"],
@@ -223,6 +245,12 @@ class ApiNpcRouter(webapp2.RequestHandler):
     def get(self, id):
         result = {}
 
+        npc = Npc.get_npc(id)
+
+        if(npc):
+            self.response.out.write(npc)
+            return
+
         if(id == "knight"):
             result = {
                 "text": [
@@ -268,8 +296,13 @@ application = webapp2.WSGIApplication([
     # Experimental API
     ('^/api/me',         ApiMeRouter),
     ('^/api/move',       ApiMoveRouter),
-    ('^/api/map/(\w+)',  ApiMapRouter),
-    ('^/api/npc/(\w+)',  ApiNpcRouter),
+
+    ('^/api/editmap/(\w+)', ApiEditMapRouter),
+    ('^/api/editnpc/(\w+)', ApiEditNpcRouter),
+
+    ('^/api/map/(\w+)',     ApiMapRouter),
+    ('^/api/npc/(\w+)',     ApiNpcRouter),
+
 
     ('^/api/tiles',      ApiTilesRouter),
 
