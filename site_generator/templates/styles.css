@@ -1,0 +1,341 @@
+/* Based largely on...
+ *
+ * pied, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+ *
+ * Download: http://zypopwebtemplates.com/
+ *
+ * License: Creative Commons Attribution
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+	background: #000000;
+	margin:0;
+	padding:0;
+	font-family: 'Open Sans', 'sans-serif';
+	font-size: 1.0em;
+	color: %%COLOR2%%;
+	font-weight: 200;
+}
+
+* {
+	margin:0;
+	padding:0;
+}
+
+/** element defaults **/
+table {
+	width: 100%;
+	text-align: left;
+}
+
+th, td {
+	padding: 10px 10px;
+}
+
+p {
+	line-height: 1.9em;
+	margin-bottom: 20px;
+}
+
+h1 {
+	color: %%COLOR2%%;
+	font-size: 2.0em;
+}
+
+h2 {
+	color: %%COLOR2%%;
+	font-size: 1.8em;
+	letter-spacing: 0px;
+	font-weight: normal;
+	padding: 0 0 5px;
+	margin: 0;
+}
+
+h3 {
+	color: %%COLOR3%%;
+	font-size: 1.6em;
+	font-weight: normal;
+	margin-bottom: 10px;
+	letter-spacing: -1px;
+}
+
+h4 {
+    color: %%COLOR2%%;
+    font-size: 1.4em;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
+h5 {
+	padding-bottom: 10px;
+	font-size: 1.2em;
+	color: %%COLOR2%%;
+}
+
+ul, ol {
+	margin: 0 0 35px 35px;
+}
+
+li {
+	padding-bottom: 5px;
+}
+
+li ol, li ul {
+	font-size: 1.0em;
+	margin-bottom: 0;
+	padding-top: 5px;
+}
+
+.width {
+	width: 940px;
+	margin: 0 auto;
+}
+
+#container {
+	background-color: %%COLOR1%%;
+	width: 980px;
+	border-left: 30px solid %%COLOR1%%;
+	border-right: 30px solid %%COLOR1%%;
+	margin: 0 auto;
+}
+
+header {
+	padding: 40px 20px;
+	background-color: %%COLOR1%%;
+	margin: 0 auto;
+	text-align:left;
+}
+
+header h1 a, header h1 a:hover {
+ color: %%COLOR2%%;
+    font-size: 1.4em;
+	padding: 10px;
+    font-weight: normal;
+    letter-spacing: -2px;
+    line-height:1.2em;
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+
+nav {
+	border-top: 1px solid %%COLOR4%%;
+	border-bottom: 1px solid %%COLOR4%%;
+	height: 45px;
+	background-color: %%COLOR3%%;
+}
+
+nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+nav ul li {
+	float: left;
+	display: block;
+	padding: 0;
+}
+
+
+nav ul li a {
+    color: %%COLOR2%%;
+    display: block;
+    font-size: 0.85em;
+    letter-spacing: 0;
+	margin: 5px 3px 0;
+	font-weight: normal;
+    padding: 8px 10px 8px;
+    text-decoration: none;
+}
+nav ul li.selected a,
+nav ul li.selected a:hover { 
+	color: %%COLOR2%%;
+	background-color: %%COLOR3%%;
+	font-weight:bold;
+	box-shadow: -1px 1px 0 %%COLOR4%%;
+}
+
+
+nav ul li a:hover {
+	color: %%COLOR2%%;
+	text-decoration: none;
+}
+
+img.header-image { padding-top: 10px;
+			margin-bottom: -3px; }
+
+#body {
+	background: none;
+	margin: 5px auto 0;
+ 	padding: 0;
+	clear: both;
+}
+
+#content {
+    float: right;
+    width: 71%;
+}
+
+article {
+    padding: 10px 5px 20px 10px;
+ }
+
+article h2 {
+    padding-bottom: 0;
+    font-size: 2.2em;
+}
+
+article p, article ul, article ol {
+    font-size: 0.9em;
+}
+
+article .article-info {
+    color: %%COLOR4%%;
+    font-size: 12px;
+    font-style: italic;
+    padding: 0 0 10px 0;
+}
+
+article .article-info a {
+	color: %%COLOR4%%;
+}
+
+.sidebar {
+    float: left;
+    width: 28%;
+	margin-top: 10px;
+}
+
+.sidebar h4 {
+	padding-bottom: 0;
+	font-weight: 100;
+	color: %%COLOR1%%;
+	font-size: 1.1em;
+	padding: 5px 10px;
+	background-color: %%COLOR4%%;
+	box-shadow:-2px 2px 0px %%COLOR1%%;
+}
+
+.sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar ul li {
+	margin-bottom: 20px;
+	line-height: 1.9em;
+}
+
+.sidebar li ul {
+    list-style: none outside none;
+    margin: 0px;
+}
+
+.sidebar li ul li {
+	display: block;
+	border-top: none;
+	padding: 5px 7px;
+	margin: 0;
+	line-height: 1.5em;
+	font-size: 0.8em;
+}
+
+.sidebar li ul li.text {
+	border-bottom: none;
+}
+
+
+
+.sidebar li ul li a {
+	font-weight: normal;
+	color: %%COLOR1%%;
+}
+
+.sidebar li ul li a:hover {
+	color: %%COLOR2%%;
+}
+
+
+.sidebar li ul li a.readmore {
+   font-weight: bold;
+}
+
+.clear {
+	clear: both;
+}
+
+footer {
+	margin:20px auto 0;
+	background: %%COLOR1%%;
+	border-top: 10px solid %%COLOR4%%;
+}
+
+footer p {
+	text-align: left;
+	color: %%COLOR2%%;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+footer p a {
+	color: %%COLOR2%%;
+	font-weight: bold;
+}
+
+.footer-content {
+	padding: 20px 25px 30px;
+}
+
+footer .footer-content ul {
+	width: 260px;
+	list-style: none;
+	margin: 0 65px 0 0;
+	padding: 0;
+	float: left;
+}
+
+footer .footer-content li {
+	padding: 5px 5px;
+}
+
+footer .footer-content li a, footer .footer-content h4 {
+}
+
+footer .footer-content li a {
+ color: %%COLOR4%%;
+    font-size: 0.8em;
+    text-decoration: underline;
+}
+
+footer .footer-content li a:hover { 
+	color: %%COLOR2%%;
+}
+
+footer .footer-content h4 {
+   color: %%COLOR2%%;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding-bottom: 0;
+}
+
+footer .footer-content ul.endfooter {
+	margin-right: 0;
+}
+footer .footer-bottom {
+	padding: 10px;
+	text-align: center;
+	background-color: %%COLOR1%%;
+}
+
+footer .footer-bottom p {
+	text-align: center;
+}
+
+footer .footer-bottom p, footer .footer-bottom p a {
+	color: %%COLOR1%%;
+}
